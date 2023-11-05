@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <h1>ChatGPT API Demo</h1>
+    <div>
+        <label for="userMessage">Your Message:</label>
+        <input type="text" id="userMessage">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <div id="response">
+        <!-- Assistant's response will be displayed here -->
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userMessage = document.getElementById('userMessage').value;
+            const responseDiv = document.getElementById('response');
+            
+            if (userMessage) {
+                // Clear previous responses
+                responseDiv.innerHTML = '';
+
+                // Send a POST request to the API
+                fetch('/api/chatgpt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display assistant's response
+                    responseDiv.innerHTML = '<p><strong>Assistant:</strong> ' + data.reply + '</p>';
+                })
+                .catch(error => {
+                    responseDiv.innerHTML = '<p><strong>Error:</strong> ' + error + '</p>';
+                });
+
+                // Clear the input field
+                document.getElementById('userMessage').value = '';
+            }
+        }
+    </script>
+    
+</div>
