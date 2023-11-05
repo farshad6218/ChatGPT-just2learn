@@ -9,6 +9,7 @@ References :
 
 https://platform.openai.com/docs/libraries/c-net
 <br/>
+<br/>
 OpenAI-API-dotnet by OkGoDoIt
 <br/>
 https://github.com/OkGoDoIt/OpenAI-API-dotnet
